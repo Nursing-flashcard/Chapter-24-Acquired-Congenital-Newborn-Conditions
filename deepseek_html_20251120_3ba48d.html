@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 24: Acquired & Congenital Newborn Conditions Flashcards</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            height: 95vh;
+            max-height: 95vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30 Z" fill="white"/></svg>');
+        }
+        
+        .header h1 {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .header .subtitle {
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        .chapter-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        
+        .progress {
+            background: #0077b6;
+            height: 8px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .flashcard {
+            padding: clamp(10px, 3vw, 20px);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f8f9fa;
+            overflow-y: auto;
+        }
+        
+        .question-container {
+            display: flex;
+            gap: clamp(10px, 2vw, 15px);
+            align-items: flex-start;
+            margin-bottom: clamp(10px, 2vw, 15px);
+        }
+        
+        .question-icon {
+            background: #4facfe;
+            color: white;
+            width: clamp(35px, 8vw, 50px);
+            height: clamp(35px, 8vw, 50px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(79, 172, 254, 0.3);
+        }
+        
+        .question {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            line-height: 1.6;
+            color: #2c3e50;
+            flex-grow: 1;
+            font-weight: 500;
+        }
+        
+        .image-container {
+            margin: clamp(8px, 2vw, 15px) 0;
+            text-align: center;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            max-height: clamp(120px, 20vh, 180px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ecf0f1;
+        }
+        
+        .concept-image {
+            max-width: 100%;
+            max-height: clamp(110px, 18vh, 160px);
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .hint-container {
+            margin: clamp(8px, 2vw, 15px) 0;
+            text-align: center;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(6px, 1.5vw, 10px);
+            margin-bottom: clamp(10px, 2vw, 20px);
+            flex: 1;
+        }
+        
+        .option {
+            padding: clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 18px);
+            border: 2px solid #bdc3c7;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 1.5vw, 10px);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+            border-color: #95a5a6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .option-letter {
+            background: #ecf0f1;
+            color: #2c3e50;
+            width: clamp(24px, 5vw, 28px);
+            height: clamp(24px, 5vw, 28px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+        }
+        
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .option.correct .option-letter {
+            background: #28a745;
+            color: white;
+        }
+        
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .option.incorrect .option-letter {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .feedback {
+            padding: clamp(12px, 2.5vw, 16px);
+            border-radius: 12px;
+            margin-bottom: clamp(10px, 2vw, 16px);
+            display: none;
+            align-items: center;
+            gap: clamp(8px, 1.5vw, 12px);
+            font-weight: 500;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            display: flex;
+        }
+        
+        .feedback.incorrect {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+            display: flex;
+        }
+        
+        .feedback-icon {
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            flex-shrink: 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: clamp(12px, 2.5vw, 16px) clamp(16px, 3vw, 24px);
+            background: #ecf0f1;
+            border-top: 1px solid #bdc3c7;
+            flex-shrink: 0;
+        }
+        
+        .counter {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+        
+        .btn {
+            padding: clamp(10px, 2vw, 12px) clamp(15px, 2.5vw, 20px);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: clamp(6px, 1vw, 8px);
+            font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(79, 172, 254, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(149, 165, 166, 0.3);
+        }
+        
+        .btn-hint {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: white;
+            padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
+            font-size: clamp(0.75rem, 1.6vw, 0.85rem);
+        }
+        
+        .btn-hint:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 193, 7, 0.3);
+        }
+        
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .rationale {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #ffd43b;
+            border-radius: 12px;
+            padding: clamp(12px, 2.5vw, 16px);
+            margin-top: clamp(8px, 1.5vw, 12px);
+            display: none;
+        }
+        
+        .rationale.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .rationale h4 {
+            color: #856404;
+            margin-bottom: clamp(6px, 1.2vw, 10px);
+            display: flex;
+            align-items: center;
+            gap: clamp(6px, 1.2vw, 8px);
+            font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+        }
+        
+        .rationale p {
+            color: #856404;
+            line-height: 1.6;
+            font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+        }
+        
+        .hint {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px dashed #2196f3;
+            border-radius: 12px;
+            padding: clamp(12px, 2.5vw, 16px);
+            margin-top: clamp(6px, 1.2vw, 10px);
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .hint.show {
+            display: block;
+        }
+        
+        .hint h4 {
+            color: #1565c0;
+            margin-bottom: clamp(6px, 1.2vw, 8px);
+            display: flex;
+            align-items: center;
+            gap: clamp(5px, 1vw, 6px);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+        
+        .hint p {
+            color: #1565c0;
+            line-height: 1.5;
+            font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+            font-style: italic;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stats {
+            display: flex;
+            gap: clamp(8px, 1.5vw, 15px);
+            justify-content: center;
+            margin-top: clamp(4px, 1vw, 10px);
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            background: rgba(255,255,255,0.2);
+            padding: clamp(5px, 1vw, 6px) clamp(8px, 1.8vw, 12px);
+            border-radius: 20px;
+            font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+            white-space: nowrap;
+        }
+        
+        /* Cancel selection button */
+        .cancel-selection {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            margin: 0 auto clamp(10px, 2vw, 15px) auto;
+            display: none;
+        }
+        
+        .cancel-selection:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+        }
+        
+        .cancel-selection.show {
+            display: flex;
+        }
+        
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 15px;
+            }
+            
+            .question-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+            }
+            
+            .question-icon {
+                align-self: center;
+            }
+            
+            .navigation {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .btn {
+                padding: 10px 16px;
+                flex: 1;
+                justify-content: center;
+                min-width: 120px;
+            }
+            
+            .counter {
+                order: -1;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .flashcard {
+                padding: 8px;
+            }
+            
+            .navigation {
+                padding: 10px 12px;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+            
+            .options {
+                gap: 5px;
+            }
+            
+            .option {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👶 Chapter 24: Acquired & Congenital Newborn Conditions</h1>
+            <div class="subtitle">31 Flashcards with Detailed Rationales</div>
+            <div class="chapter-badge">Nursing Management of Newborns at Risk</div>
+            <div class="stats">
+                <div class="stat">🎯 31 Questions</div>
+                <div class="stat">💡 Hint Feature</div>
+                <div class="stat">📖 Visual Learning</div>
+                <div class="stat">↩️ Cancel Wrong Answers</div>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="flashcard">
+            <div class="question-container">
+                <div class="question-icon">?</div>
+                <div class="question" id="question"></div>
+            </div>
+            <div class="image-container" id="imageContainer">
+                <img class="concept-image" id="conceptImage" alt="Educational illustration">
+            </div>
+            
+            <div class="hint-container">
+                <button class="btn btn-hint" id="hintBtn" onclick="showHint()">
+                    💡 Show Hint
+                </button>
+                <div class="hint" id="hint">
+                    <h4>💡 Study Tip:</h4>
+                    <p id="hintText"></p>
+                </div>
+            </div>
+            
+            <div class="options" id="options"></div>
+            
+            <!-- Cancel Selection Button - Only shows for wrong answers -->
+            <button class="btn cancel-selection" id="cancelBtn" onclick="cancelSelection()">
+                ↩️ Cancel Selection
+            </button>
+            
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>💡 Rationale:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">
+                ⬅️ Previous
+            </button>
+            <div class="counter" id="counter">1/31</div>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const medicalImages = {
+            'mas_ecmo': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop',
+            'neonatal_sepsis': 'https://images.unsplash.com/photo-1599669454699-248893623440?w=400&h=200&fit=crop',
+            'phototherapy': 'https://images.unsplash.com/photo-1584467735871-8db9ac8e5e3a?w=400&h=200&fit=crop',
+            'group_b_strep': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop',
+            'congenital_anomalies': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop',
+            'transient_tachypnea': 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=200&fit=crop',
+            'jaundice_types': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop',
+            'cocaine_withdrawal': 'https://images.unsplash.com/photo-1584467735871-8db9ac8e5e3a?w=400&h=200&fit=crop',
+            'fetal_alcohol': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop',
+            'intraventricular_hemorrhage': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop',
+            'apgar_resuscitation': 'https://images.unsplash.com/photo-1584467735871-8db9ac8e5e3a?w=400&h=200&fit=crop',
+            'respiratory_distress': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop',
+            'pulmonary_hypertension': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop',
+            'necrotizing_enterocolitis': 'https://images.unsplash.com/photo-1584467735871-8db9ac8e5e3a?w=400&h=200&fit=crop',
+            'surfactant_deficiency': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop',
+            'healthy_people': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop',
+            'neonatal_abstinence': 'https://images.unsplash.com/photo-1584467735871-8db9ac8e5e3a?w=400&h=200&fit=crop',
+            'birth_trauma': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop',
+            'withdrawal_management': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop',
+            'medication_calc': 'https://images.unsplash.com/photo-1584467735871-8db9ac8e5e3a?w=400&h=200&fit=crop',
+            'omphalocele': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop',
+            'meconium_aspiration': 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop',
+            'toxicology_testing': 'https://images.unsplash.com/photo-1584467735871-8db9ac8e5e3a?w=400&h=200&fit=crop',
+            'erb_palsy': 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop'
+        };
+
+        const questions = [
+            {
+                question: "1. A newborn with severe meconium aspiration syndrome (MAS) is not responding to conventional treatment. Which measure would the nurse anticipate as possibly necessary for this newborn?",
+                options: [
+                    "Extracorporeal membrane oxygenation (ECMO)",
+                    "Respiratory support with a ventilator",
+                    "Insertion of a laryngoscope for deep suctioning",
+                    "Replacement of an endotracheal tube via X-ray"
+                ],
+                correct: 0,
+                rationale: "If conventional measures are ineffective, then the nurse would need to prepare the newborn for ECMO. Hyperoxygenation, ventilatory support, and direct tracheal suctioning are typically used initially to promote tissue perfusion. However, if these are ineffective, ECMO would be the next step.",
+                image: 'mas_ecmo',
+                hint: "Consider advanced life support options when conventional treatment fails."
+            },
+            {
+                question: "2. A nurse is providing care to a newborn. The nurse suspects that the newborn is developing sepsis based on which assessment finding?",
+                options: [
+                    "Increased urinary output",
+                    "Interest in feeding",
+                    "Temperature instability",
+                    "Wakefulness"
+                ],
+                correct: 2,
+                rationale: "Manifestations of sepsis are typically nonspecific and may include hypothermia (temperature instability), oliguria or anuria, lack of interest in feeding, and lethargy.",
+                image: 'neonatal_sepsis',
+                hint: "Look for subtle signs of systemic infection in newborns."
+            },
+            {
+                question: "3. A nurse is providing care to a newborn who is receiving phototherapy. Which action would the nurse most likely include in the plan of care?",
+                options: [
+                    "Keeping the newborn in the supine position",
+                    "Covering the newborn's eyes while under the bililights",
+                    "Ensuring that the newborn is covered or clothed",
+                    "Reducing the amount of fluid intake to 8 ounces daily"
+                ],
+                correct: 1,
+                rationale: "During phototherapy, the newborn's eyes are covered to protect them from the lights. The newborn is turned every 2 hours to expose all areas of the body to the lights and is kept undressed, except for the diaper area, to provide maximum body exposure to the lights. Fluid intake is increased to allow for added fluid, protein, and calories.",
+                image: 'phototherapy',
+                hint: "Consider safety measures and treatment effectiveness for phototherapy."
+            },
+            {
+                question: "4. A newborn has been diagnosed with a group B streptococcal infection shortly after birth. The nurse understands that the newborn most likely acquired this infection from which cause?",
+                options: [
+                    "Improper hand washing",
+                    "Contaminated formula",
+                    "Nonsterile catheter insertion",
+                    "Mother's birth canal"
+                ],
+                correct: 3,
+                rationale: "Most often, a newborn develops a group B streptococcus infection during the birthing process when the newborn comes into contact with an infected birth canal. Improper hand washing, contaminated formula, and nonsterile catheter insertion would most likely lead to a late-onset infection, which typically occurs in the nursery due to horizontal transmission.",
+                image: 'group_b_strep',
+                hint: "Consider vertical transmission during delivery."
+            },
+            {
+                question: "5. Which action would be most appropriate for the nurse to take when a newborn has an unexpected anomaly at birth?",
+                options: [
+                    "Show the newborn to the parents as soon as possible while explaining the defect.",
+                    "Remove the newborn from the birthing area immediately.",
+                    "Inform the parents that there is nothing wrong at the moment.",
+                    "Tell the parents that the newborn must go to the nursery immediately."
+                ],
+                correct: 0,
+                rationale: "When an anomaly is identified at or after birth, parents need to be informed promptly and given a realistic appraisal of the severity of the condition, the prognosis, and treatment options so that they can participate in all decisions concerning their child. Removing the newborn from the area or telling them that the newborn needs to go to the nursery immediately is inappropriate and would only add to the parents' anxieties and fears. Telling them that nothing is wrong is inappropriate because it violates their right to know.",
+                image: 'congenital_anomalies',
+                hint: "Focus on family-centered communication and support."
+            },
+            {
+                question: "6. The nurse prepares to administer a gavage feeding for a newborn with transient tachypnea based on the understanding that this type of feeding is necessary because:",
+                options: [
+                    "Lactase enzymatic activity is not adequate.",
+                    "Oxygen demands need to be reduced.",
+                    "Renal solute lead must be considered.",
+                    "Hyperbilirubinemia is likely to develop."
+                ],
+                correct: 1,
+                rationale: "For the newborn with transient tachypnea, the newborn's respiratory rate is high, increasing the oxygen demand. Thus, measures are initiated to reduce this demand. Gavage feedings are one way to do so. With transient tachypnea, enzyme activity and kidney function are not affected. This condition typically resolves within 72 hours. The risk for hyperbilirubinemia is not increased.",
+                image: 'transient_tachypnea',
+                hint: "Consider energy conservation in respiratory distress."
+            },
+            {
+                question: "7. Which information would the nurse include when teaching a new mother about the difference between pathologic and physiologic jaundice?",
+                options: [
+                    "Physiologic jaundice results in kernicterus.",
+                    "Pathologic jaundice appears within 24 hours after birth.",
+                    "Both are treated with exchange transfusions of maternal O- blood.",
+                    "Physiologic jaundice requires transfer to the NICU."
+                ],
+                correct: 1,
+                rationale: "Pathologic jaundice appears within 24 hours after birth whereas physiologic jaundice commonly appears around the third or fourth days of life. Kernicterus is more commonly associated with pathologic jaundice. An exchange transfusion is used only if the total serum bilirubin level remains elevated after intensive phototherapy. With this procedure, the newborn's blood is removed and replaced with nonhemolyzed red blood cells from a donor. Physiologic jaundice often is treated at home.",
+                image: 'jaundice_types',
+                hint: "Focus on timing and severity differences between the two types."
+            },
+            {
+                question: "8. A nurse is teaching the mother of a newborn experiencing cocaine withdrawal about caring for the neonate at home. The mother stopped using cocaine near the end of her pregnancy. The nurse determines that additional teaching is needed when the mother identifies which action as appropriate for her newborn?",
+                options: [
+                    "Wrapping the newborn snugly in a blanket",
+                    "Waking the newborn every hour",
+                    "Checking the newborn's fontanels",
+                    "Offering a pacifier"
+                ],
+                correct: 1,
+                rationale: "Stimuli need to be decreased. Waking the newborn every hour would most likely be too stimulating. Measures such as swaddling the newborn tightly and offering a pacifier help to decrease irritable behaviors. A pacifier also helps to satisfy the newborn's need for nonnutritive sucking. Checking the fontanels provides evidence of hydration.",
+                image: 'cocaine_withdrawal',
+                hint: "Consider environmental modifications for drug-exposed newborns."
+            },
+            {
+                question: "9. A newborn is suspected of having fetal alcohol syndrome. Which finding would the nurse expect to assess?",
+                options: [
+                    "Bradypnea",
+                    "Hydrocephaly",
+                    "Flattened maxilla",
+                    "Hypoactivity"
+                ],
+                correct: 2,
+                rationale: "A newborn with fetal alcohol syndrome exhibits characteristic facial features such as microcephaly (not hydrocephaly), small palpebral fissures, and abnormally small eyes, flattened or absent maxilla, epicanthal folds, thin upper lip, and missing vertical groove in the median portion of the upper lip. Bradypnea is not typically associated with fetal alcohol syndrome. Fine and gross motor development is delayed, and the newborn shows poor hand-eye coordination but not hypoactivity.",
+                image: 'fetal_alcohol',
+                hint: "Focus on characteristic facial features of FAS."
+            },
+            {
+                question: "10. After teaching the parents of a newborn with periventricular hemorrhage about the disorder and treatment, which statement by the parents indicates that the teaching was successful?",
+                options: [
+                    "\"We'll make sure to cover both of his eyes to protect them.\"",
+                    "\"Our newborn could develop a learning disability later on.\"",
+                    "\"Once the bleeding ceases, there won't be any more worries.\"",
+                    "\"We need to get family members to donate blood for transfusion.\""
+                ],
+                correct: 1,
+                rationale: "Periventricular hemorrhage has long-term sequelae such as seizures, hydrocephalus, periventricular leukomalacia, cerebral palsy, learning disabilities, vision or hearing deficits, and intellectual disability. Covering the eyes is more appropriate for the newborn receiving phototherapy. The bleeding in the brain can lead to serious long-term effects. Blood transfusions are not used to treat periventricular hemorrhage.",
+                image: 'intraventricular_hemorrhage',
+                hint: "Consider long-term neurological outcomes."
+            },
+            {
+                question: "11. A newborn has an Apgar score of 6 at 5 minutes. Which action would be the priority?",
+                options: [
+                    "Initiating IV fluid therapy",
+                    "Beginning resuscitative measures",
+                    "Promoting kangaroo care",
+                    "Obtaining a blood culture"
+                ],
+                correct: 1,
+                rationale: "An Apgar score below 7 at 1 or 5 minutes indicates the need for resuscitation. Intravenous fluid therapy and blood cultures may be done once resuscitation is started. Kangaroo care would be appropriate once the newborn is stable.",
+                image: 'apgar_resuscitation',
+                hint: "Remember Apgar scoring guidelines for resuscitation needs."
+            },
+            {
+                question: "12. While reviewing a newborn's medical record, the nurse notes that the chest X-ray shows a ground glass pattern. The nurse interprets this as indicative of:",
+                options: [
+                    "Respiratory distress syndrome.",
+                    "Transient tachypnea of the newborn.",
+                    "Asphyxia.",
+                    "Persistent pulmonary hypertension."
+                ],
+                correct: 0,
+                rationale: "The chest X-ray of a newborn with RDS reveals a reticular (ground glass) pattern. For TTN, the chest X-ray shows lung overaeration and prominent perihilar interstitial markings and streakiness. A chest X-ray for asphyxia would reveal possible structural abnormalities that might interfere with respiration, but the results are highly variable. An echocardiogram would be done to evaluate persistent pulmonary hypertension.",
+                image: 'respiratory_distress',
+                hint: "Know characteristic radiographic findings for respiratory conditions."
+            },
+            {
+                question: "13. A newborn is suspected of developing persistent pulmonary hypertension. The nurse would expect to prepare the newborn for which procedure to confirm the suspicion?",
+                options: [
+                    "Chest X-ray",
+                    "Blood cultures",
+                    "Echocardiogram",
+                    "Stool for occult blood"
+                ],
+                correct: 2,
+                rationale: "An echocardiogram is used to reveal right-to-left shunting of blood to confirm the diagnosis of persistent pulmonary hypertension. Chest X-ray would be most likely used to aid in the diagnosis of RDS or TTN. Blood cultures would be helpful in evaluating for neonatal sepsis. Stool for occult blood may be done to evaluate for NEC.",
+                image: 'pulmonary_hypertension',
+                hint: "Consider diagnostic tests that evaluate cardiac shunting."
+            },
+            {
+                question: "14. A preterm newborn is receiving enteral feedings. Which finding would alert the nurse to suspect that the newborn is developing NEC?",
+                options: [
+                    "Irritability",
+                    "Sunken abdomen",
+                    "Clay-colored stools",
+                    "Feeding intolerance"
+                ],
+                correct: 3,
+                rationale: "The newborn with NEC may exhibit feeding intolerance with lethargy, abdominal distention and tenderness, and bloody stools.",
+                image: 'necrotizing_enterocolitis',
+                hint: "Focus on gastrointestinal symptoms in preterm infants."
+            },
+            {
+                question: "15. The nurse frequently assesses the respiratory status of a preterm newborn based on the understanding that the newborn is at increased risk for respiratory distress syndrome because of:",
+                options: [
+                    "Inability to clear fluids.",
+                    "Immature respiratory control center.",
+                    "Deficiency of surfactant.",
+                    "Smaller respiratory passages."
+                ],
+                correct: 2,
+                rationale: "A preterm newborn is at increased risk for respiratory distress syndrome (RDS) because of a surfactant deficiency. Surfactant helps to keep the alveoli open and maintain lung expansion. With a deficiency, the alveoli collapse, predisposing the newborn to RDS. An inability to clear fluids can lead to transient tachypnea. Immature respiratory control centers lead to an increased risk for apnea. Smaller respiratory passages led to an increased risk for obstruction.",
+                image: 'surfactant_deficiency',
+                hint: "Understand the role of surfactant in lung function."
+            },
+            {
+                question: "16. At a preconception counseling class, a client expresses concern and wonders how Healthy People 2030 will improve maternal–infant outcomes. Which response(s) by the nurse is appropriate? Select all that apply.",
+                options: [
+                    "Healthy People 2030 will reduce the rate of fetal and infant deaths.",
+                    "Healthy People 2030 will decrease the number of all infant deaths (within 1 year).",
+                    "Healthy People 2030 will decrease the number of neonatal deaths (within the first year).",
+                    "Healthy People 2030 will foster early and consistent prenatal care."
+                ],
+                correct: [0, 1, 2, 3],
+                rationale: "One of the leading health indicators as identified by Healthy People 2030 refers to decreasing the number of infant deaths. Acquired and congenital conditions account for a significant percentage of infant deaths. Specific objectives include reducing the rate of fetal deaths at 20 or more weeks of gestation though the nursing action of fostering early and consistent prenatal care; reducing the rate of all infant deaths (within 1 year) through the nursing actions of including education to place infants on their backs for naps and sleep to prevent sudden infant death syndrome (SIDS), avoiding exposing newborns to cigarette smoke, and ensuring that infants with birth defects receive health care needed in order to thrive; and reducing the occurrence of fetal alcohol syndrome (FAS) through the nursing actions or counseling girls and women to avoid alcohol use during pregnancy, and participating in programs for at-risk groups, including adolescents, about the effects of substance use, especially alcohol, during pregnancy.",
+                image: 'healthy_people',
+                hint: "Consider public health initiatives for maternal-infant health."
+            },
+            {
+                question: "17. A neonate is exhibiting signs of neonatal abstinence syndrome. Which findings would confirm this diagnosis? Select all that apply.",
+                options: [
+                    "Adequate rooting and sucking",
+                    "Frequent sneezing",
+                    "Persistent fever",
+                    "Shrill, high-pitched cry",
+                    "Hypotonic reflexes",
+                    "Frequent yawning"
+                ],
+                correct: [1, 2, 3, 5],
+                rationale: "Manifestations of neonatal abstinence syndrome include a shrill, high-pitched cry; persistent fever; frequent yawning; and frequent sneezing. Rather than adequate rooting and sucking, these actions will be frantic in a neonate with abstinence syndrome. In addition, these neonates will have hypertonic muscle tone, not hypotonic reflexes.",
+                image: 'neonatal_abstinence',
+                hint: "Look for signs of neurological and autonomic instability."
+            },
+            {
+                question: "18. A pregnant woman gives birth to a small for gestational age neonate who is admitted to the neonatal intensive care unit with seizure activity. The neonate appears to have abnormally small eyes and a thin upper lip. The infant is noted to be microcephalic. Based on these findings, which substance would the nurse suspect the women of using during pregnancy?",
+                options: [
+                    "Alcohol",
+                    "Cocaine",
+                    "Heroin",
+                    "Methamphetamine"
+                ],
+                correct: 0,
+                rationale: "This child's features match those of fetal alcohol syndrome, including microcephaly, small palpebral (eyelid) fissures, abnormally small eyes, and fetal growth restriction.",
+                image: 'fetal_alcohol',
+                hint: "Recognize characteristic facial features of specific substance exposures."
+            },
+            {
+                question: "19. The nurse is developing a plan of care for a neonate experiencing symptoms of drug withdrawal. What should be included in this plan?",
+                options: [
+                    "Administer glucose between feedings.",
+                    "Schedule feedings every 4 to 6 hours.",
+                    "Swaddle the infant between feedings.",
+                    "Rock horizontally."
+                ],
+                correct: 2,
+                rationale: "Supportive interventions to promote comfort include swaddling, low lighting, gentle handling, quiet environment with minimal stimulation, use of soft voices, pacifiers to promote 'self-soothing,' frequent small feedings, and vertical rocking, which will soothe the newborn's neurological system.",
+                image: 'withdrawal_management',
+                hint: "Focus on comfort measures and environmental modifications."
+            },
+            {
+                question: "20. A neonate born addicted to cocaine is now being treated with medication for acute neonatal abstinence syndrome. Which medication will be prescribed to relieve withdrawal symptoms?",
+                options: [
+                    "Meperidine",
+                    "Adrenalin",
+                    "Naloxone",
+                    "Morphine sulphate"
+                ],
+                correct: 3,
+                rationale: "Pharmacologic treatment is warranted if conservative measures are not adequate. Common medications used in the management of newborn withdrawal include an opioid (morphine or methadone) and phenobarbital as a second drug if the opiate does not adequately control symptoms. The other drugs are not used in NAS treatment.",
+                image: 'medication_calc',
+                hint: "Know first-line pharmacological treatments for NAS."
+            },
+            {
+                question: "21. The pediatrician prescribes morphine sulphate 0.2 mg/kg orally q 4 hour for a neonate suffering from drug withdrawal. The neonate weighs 3,800 grams. How much of drug will the nurse give in 24 hours? Record your answer using two decimal places.",
+                options: [
+                    "2.28 mg",
+                    "3.42 mg",
+                    "4.56 mg",
+                    "5.70 mg"
+                ],
+                correct: 2,
+                rationale: "3800 grams = 3.8 kg. 3.8 kg × 0.20 mg × 6 doses = 4.56 mg in 24 hours.",
+                image: 'medication_calc',
+                hint: "Calculate: weight in kg × dose × number of doses in 24 hours."
+            },
+            {
+                question: "22. The nurse is admitting a term, large-for-gestational-age neonate weighing 4,610 g (10 lb, 2 oz), born vaginally with a mid-forceps assist, to a 15-year-old primipara. What would the nurse anticipate as a result of the birth?",
+                options: [
+                    "Fracture of the tibia",
+                    "Fracture of the femur",
+                    "Fracture of a rib",
+                    "Midclavicular fracture"
+                ],
+                correct: 3,
+                rationale: "Trauma to the newborn may result from the use of mechanical forces, such as forceps during birth. Primarily injuries are found in large babies and babies with shoulder dystocia. Associated traumatic injuries include fracture of the clavicle or humerus or subluxations of the shoulder or cervical spine.",
+                image: 'birth_trauma',
+                hint: "Consider common birth injuries with instrumental delivery."
+            },
+            {
+                question: "23. A 33 weeks' gestation neonate is being assessed for necrotizing enterocolitis (NEC). Which nursing actions would the nurse implement? Select all that apply.",
+                options: [
+                    "Perform hemoccult tests on stools.",
+                    "Monitor abdominal girth.",
+                    "Measure gastric residual before feeds.",
+                    "Assess bowel sounds before each feed.",
+                    "Assess urine output."
+                ],
+                correct: [0, 1, 2, 3],
+                rationale: "Always keep the possibility of NEC in mind when dealing with preterm newborns, especially when enteral feedings are being administered. Note feeding intolerance, diarrhea, bile stained emesis, or grossly bloody stools. Perform hemoccult tests on the bloody stool. Assess the neonate's abdomen for distention, tenderness, and visible loops of bowel. Measure the abdominal circumference, noting an increase. Listen to bowel sounds before each feeding. Determine residual gastric volume prior to feeding; when it is elevated, be suspicious for NEC. Assessing urine output is not essential.",
+                image: 'necrotizing_enterocolitis',
+                hint: "Focus on gastrointestinal assessment and monitoring."
+            },
+            {
+                question: "24. A 30 weeks' gestation neonate born with low Apgar scores is in the neonatal intensive care unit with respiratory distress syndrome and underwent an exchange transfusion for anemia. Which factors place the neonate at risk for necrotizing enterocolitis? Select all that apply",
+                options: [
+                    "Preterm birth",
+                    "Respiratory distress syndrome",
+                    "Low Apgar scores",
+                    "Hyperthermia",
+                    "Hyperglycemia",
+                    "Exchange transfusion"
+                ],
+                correct: [0, 1, 2, 5],
+                rationale: "The predisposing factors for the development of necrotizing enterocolitis include preterm labor, respiratory distress syndrome, exchange transfusion, and low birth weight. Low Apgar scores, hypothermia, and hypoglycemia are also risk factors.",
+                image: 'necrotizing_enterocolitis',
+                hint: "Consider multifactorial risk factors for NEC."
+            },
+            {
+                question: "25. A preterm newborn is admitted to the neonatal intensive care with the diagnosis of an omphalocele. What nursing actions would the nurse perform? Select all that apply.",
+                options: [
+                    "The abdominal contents are protected.",
+                    "Fluid loss of the neonate will be minimized.",
+                    "Perfusion to the exposed abdominal contents will be maintained.",
+                    "Neonatal weight loss will be prevented.",
+                    "Assessment of hyperbilirubinemia will be monitored."
+                ],
+                correct: [0, 1, 2],
+                rationale: "Nursing management of newborns with omphalocele or gastroschisis focuses on preventing hypothermia, maintaining perfusion to the eviscerated abdominal contents by minimizing fluid loss, and protecting the exposed abdominal contents from trauma and infection. Weight loss at this point is not a priority, and neither is assessing bilirubin.",
+                image: 'omphalocele',
+                hint: "Focus on protecting exposed abdominal contents and preventing complications."
+            },
+            {
+                question: "26. The nurse in the neonatal intensive care unit is caring for a neonate she suspects is at risk for an intraventricular hemorrhage (IVH). Which nursing actions would be priorities? Select all that apply.",
+                options: [
+                    "Maintain fetal flexed position.",
+                    "Administer fluids slowly.",
+                    "Assess for bulging fontanel.",
+                    "Measure head circumference daily.",
+                    "Assess Moro reflex.",
+                    "Measure intake and output."
+                ],
+                correct: [0, 1, 2, 3],
+                rationale: "Care of the newborn with IVH is primarily supportive. Correct anemia, acidosis, and hypotension with fluids and medications. Administer fluids slowly to prevent fluctuations in blood pressure. Avoid rapid volume expansion to minimize changes in cerebral blood flow. Keep the newborn in a flexed, contained position with the head elevated to prevent or minimize fluctuations in intracranial pressure. Continuously monitor the newborn for signs of hemorrhage, such as changes in the level of consciousness, bulging fontanel, seizures, apnea, and reduced activity level. Also, measuring head circumference daily to assess for expansion in size is essential in identifying complications early. Moro reflex and intake and output are routine and not associated with IVH.",
+                image: 'intraventricular_hemorrhage',
+                hint: "Focus on neurological protection and monitoring."
+            },
+            {
+                question: "27. At the breech forceps birth of a 32 weeks' gestation neonate, the nurse notes oligohydramnios with green thick amniotic fluid. The maternal history reveals a mother of Hispanic ethnicity with marked hypertension, who admits to using cocaine daily. Which factor(s) may contribute to meconium aspiration syndrome (MAS)? Select all that apply.",
+                options: [
+                    "The preterm pregnancy",
+                    "The forceps breech birth",
+                    "Maternal cocaine use",
+                    "Maternal hypertension",
+                    "Hispanic ethnicity",
+                    "Oligohydramnios present"
+                ],
+                correct: [1, 2, 3, 5],
+                rationale: "The predisposing factors for meconium aspiration syndrome include postterm pregnancy and breech presentation with forceps. Ethnicity (Pacific Islander, Indigenous Australian, Black African) is a factor. Postterm neonates are at risk for MAS, but preterm neonates are not. Exposure to drugs during pregnancy, especially tobacco and cocaine, predispose the neonate to MAS. Maternal hypertension and oligohydramnios also contribute to MAS.",
+                image: 'meconium_aspiration',
+                hint: "Consider factors that cause fetal distress and meconium passage."
+            },
+            {
+                question: "28. A 2-hour-old neonate born via caesarean birth has begun having a respiratory rate of 110 breaths/min and is in respiratory distress. What intervention(s) is a priority for the nurse to include in this neonates's care? Select all that apply.",
+                options: [
+                    "Keep the head in a 'sniff' position",
+                    "Administer oxygen",
+                    "Insert an orogastric tube",
+                    "Ensure thermoregulation",
+                    "Obtain an arterial blood gas"
+                ],
+                correct: [0, 1, 3],
+                rationale: "This neonate is experiencing manifestations of transient tachypnea of the newborn (TTN). It occurs from delayed clearing of the lungs from fluid, and can be seen in neonates born via cesarean birth, because they have not had the experience of the compression on the thorax during vaginal delivery. This starts within the first 6 hours of life and can last up to 72 hours. The priority interventions for this neonate are oxygen, thermoregulation and minimal stimulation. Keeping the head in a neutral or 'sniff' position allows for optimal airway. If the neonate becomes cold, then respiratory distress and or sepsis can develop. Minimal stimulation conserves the neonate's respiratory and heat requirements. The neonate may need placement of a peripheral IV for hydration and/or a feeding tube for formula or breast milk. The neonate should not be nipple fed until the respirations are under 60 breaths/min. A chest x-ray and an arterial blood gas may be needed also, but they would only be necessary if the neonate is in severe distress. The arterial blood gas results would show mild hypoxemia, a midly elevated CO2 level, and a normal pH.",
+                image: 'transient_tachypnea',
+                hint: "Focus on airway management and supportive care for TTN."
+            },
+            {
+                question: "29. A newborn infant has been diagnosed with persistent pulmonary hypertension of the newborn (PPHN). In providing care for this newborn what intervention should be the nurse's priority?",
+                options: [
+                    "Measure blood pressure",
+                    "Obtain arterial blood gases",
+                    "Monitor oxygen saturation",
+                    "Suction the newborn"
+                ],
+                correct: 0,
+                rationale: "PPHN occurs when there is persistent fetal circulation after birth. The pulmonary pressures do not decrease at birth when the newborn begins breathing causing hypoxemia, acidosis and vasoconstriction of the pulmonary artery. This newborn requires much care and possibly extracorporeal membrane oxygenation (ECMO). The nurse should monitor the newborn's blood pressure regularly, because hypotension can occur from ensuing heart failure and the persistent hypoxemia. Vasopressors may be needed for this newborn. The newborn should not be suctioned. Doing so causes more stimulation and worsens respiratory issues. Arterial blood gases will be obtained regularly, but they are not a priority nursing intervention. Oxygen saturation should always be monitored in a newborn with respiratory distress.",
+                image: 'pulmonary_hypertension',
+                hint: "Focus on cardiovascular monitoring in PPHN."
+            },
+            {
+                question: "30. A newborn is exhibiting symptoms of withdrawal and toxicology test have been prescribed. Which type of specimen should the nurse collect to obtain the most accurate results?",
+                options: [
+                    "Meconium",
+                    "Blood",
+                    "Urine",
+                    "Sputum"
+                ],
+                correct: 0,
+                rationale: "Toxicology screening of a newborn can include testing from blood, urine and meconium. These tests identify which drugs the newborn has been exposed to in utero. A meconium sample can detect which drugs the mother has been using from the second trimester of pregnancy until birth. It is the preferred method of testing. A urine screen identifies only the drugs the mother has used recently. The nurse should be careful not to mix the meconium sample with urine as it alters the results of the test. Blood samples can be taken and they will yield results of current drugs in the newborn's system, but they are invasive and noninvasive testing will provide the same results. If possible, testing on the mother is preferred. This testing provides quick results of what drugs the mother has been exposing the fetus to in utero. This will help in planning and providing care for the drug-exposed newborn. Sputum is not used for toxicology studies.",
+                image: 'toxicology_testing',
+                hint: "Consider which specimen provides longest detection window."
+            },
+            {
+                question: "31. A neonate is diagnosed with Erb's palsy after birth. The parents are concerned about their neonate's limp arm. The nurse explains the neonate will be scheduled to receive what recommended treatment for this condition first?",
+                options: [
+                    "Physical therapy to the joint and extremity",
+                    "Nothing but time and let nature take its course",
+                    "Surgery to correct the joint and muscle alignment",
+                    "Immobilization of the shoulder and arm"
+                ],
+                correct: 3,
+                rationale: "Treatment for a neonate with Erb palsy usually involves immobilization of the upper arm across the upper abdomen/chest to protect the shoulder from excessive motion for the first week; then gentle passive range-of-motion exercises are performed daily to prevent contractures. Surgery is not needed to regain function since there is no structural injury. Doing nothing will not help the neonate regain function in the extremity.",
+                image: 'erb_palsy',
+                hint: "Consider initial conservative management for birth injuries."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let score = 0;
+        let answers = Array(questions.length).fill(null);
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question').textContent = question.question;
+            document.getElementById('counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+            
+            // Update progress bar
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            
+            // Load image
+            const imageContainer = document.getElementById('imageContainer');
+            const conceptImage = document.getElementById('conceptImage');
+            if (question.image && medicalImages[question.image]) {
+                conceptImage.src = medicalImages[question.image];
+                imageContainer.style.display = 'flex';
+            } else {
+                imageContainer.style.display = 'none';
+            }
+            
+            // Load options
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                optionElement.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Reset feedback and rationale
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('rationale').className = 'rationale';
+            document.getElementById('hint').className = 'hint';
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').textContent = currentQuestion === questions.length - 1 ? 'Finish ➡️' : 'Next ➡️';
+            document.getElementById('nextBtn').disabled = answers[currentQuestion] === null;
+            
+            // Reset cancel button visibility
+            document.getElementById('cancelBtn').classList.remove('show');
+            
+            // If this question was already answered, show the answer
+            if (answers[currentQuestion] !== null) {
+                selectOption(answers[currentQuestion], true);
+            }
+        }
+
+        function selectOption(index, fromMemory = false) {
+            // If we're just loading a previously selected answer, don't process it as new
+            if (fromMemory) {
+                highlightSelectedOption(index);
+                showFeedback(index);
+                return;
+            }
+            
+            // If an option is already selected, do nothing (unless we're loading from memory)
+            if (selectedOption !== null && !fromMemory) return;
+            
+            selectedOption = index;
+            answers[currentQuestion] = index;
+            
+            highlightSelectedOption(index);
+            showFeedback(index);
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function cancelSelection() {
+            // Reset the selected option
+            selectedOption = null;
+            answers[currentQuestion] = null;
+            
+            // Remove highlighting from all options
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.classList.remove('correct', 'incorrect', 'selected');
+            });
+            
+            // Hide feedback and rationale
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('rationale').classList.remove('show');
+            
+            // Hide the cancel button
+            document.getElementById('cancelBtn').classList.remove('show');
+            
+            // Disable next button until a new selection is made
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        function highlightSelectedOption(index) {
+            const options = document.querySelectorAll('.option');
+            const question = questions[currentQuestion];
+            
+            options.forEach((option, i) => {
+                option.classList.remove('correct', 'incorrect', 'selected');
+                
+                if (i === index) {
+                    option.classList.add('selected');
+                    
+                    // Handle multiple correct answers (array) vs single correct answer (number)
+                    const isCorrect = Array.isArray(question.correct) 
+                        ? question.correct.includes(i)
+                        : i === question.correct;
+                    
+                    if (isCorrect) {
+                        option.classList.add('correct');
+                        if (!answers[currentQuestion]) score++;
+                        
+                        // Don't show cancel button for correct answers
+                        document.getElementById('cancelBtn').classList.remove('show');
+                    } else {
+                        option.classList.add('incorrect');
+                        
+                        // Highlight all correct answers
+                        if (Array.isArray(question.correct)) {
+                            question.correct.forEach(correctIndex => {
+                                options[correctIndex].classList.add('correct');
+                            });
+                        } else {
+                            options[question.correct].classList.add('correct');
+                        }
+                        
+                        // Show cancel button only for wrong answers
+                        document.getElementById('cancelBtn').classList.add('show');
+                    }
+                }
+            });
+        }
+
+        function showFeedback(index) {
+            const question = questions[currentQuestion];
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackText = document.getElementById('feedbackText');
+            const rationale = document.getElementById('rationale');
+            const rationaleText = document.getElementById('rationaleText');
+            
+            // Handle multiple correct answers (array) vs single correct answer (number)
+            const isCorrect = Array.isArray(question.correct) 
+                ? question.correct.includes(index)
+                : index === question.correct;
+            
+            if (isCorrect) {
+                feedback.className = 'feedback correct';
+                feedbackIcon.textContent = '✅';
+                feedbackText.textContent = 'Correct! Well done.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '❌';
+                
+                if (Array.isArray(question.correct)) {
+                    const correctLetters = question.correct.map(i => String.fromCharCode(65 + i)).join(', ');
+                    feedbackText.textContent = `Incorrect. The right answers are: ${correctLetters}`;
+                } else {
+                    feedbackText.textContent = `Incorrect. The right answer is: ${String.fromCharCode(65 + question.correct)}`;
+                }
+            }
+            
+            feedback.style.display = 'flex';
+            rationaleText.textContent = question.rationale;
+            rationale.classList.add('show');
+        }
+
+        function showHint() {
+            const hint = document.getElementById('hint');
+            const hintText = document.getElementById('hintText');
+            const question = questions[currentQuestion];
+            
+            hintText.textContent = question.hint;
+            hint.classList.add('show');
+        }
+
+        function nextCard() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                selectedOption = null;
+                loadQuestion();
+            } else {
+                // Quiz finished - show results
+                alert(`Quiz completed! Your score: ${score}/${questions.length}`);
+                currentQuestion = 0;
+                selectedOption = null;
+                score = 0;
+                answers = Array(questions.length).fill(null);
+                loadQuestion();
+            }
+        }
+
+        function previousCard() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                selectedOption = answers[currentQuestion];
+                loadQuestion();
+            }
+        }
+
+        // Initialize the app
+        loadQuestion();
+    </script>
+</body>
+</html>
